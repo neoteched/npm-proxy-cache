@@ -1,6 +1,11 @@
-npmproxycache:
-    build: .
+version: '3'
+services:
+  npm-proxy-cache:
     ports:
-      - "8080:8080"
-    # You can pass parameters here
-    command: "--host 0.0.0.0 --port 8080 --verbose --expired"
+      - 8877:8877
+    restart: always
+    image: "neoteched/npm-proxy-cache:latest"
+    volumes:
+      - ./cache:/opt/npm-proxy-cache/cache
+    command: "--host 0.0.0.0 --port 8877 --ttl 31536000 --expired"
+
